@@ -13,15 +13,15 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: Inter, sans-serif;
-    background-color: #eeeeee;
+    background-color: #f6ecbf;
   }
 `;
 
 const theme = {
-  primary: "#222831",
-  secondary: "#00adb5",
-  tertiary: "#393e46",
-  background: "#eeeeee"
+  primary: "#f6ecbf",
+  secondary: "#caadde",
+  tertiary: "#c886e5",
+  background: "#f9f9f9"
 };
 
 export function ThemeProvider({ children }) {
