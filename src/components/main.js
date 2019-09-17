@@ -9,12 +9,7 @@ export default function Main() {
     <AppWrapper>
         <Header>Texty Time</Header>
         <Dropzone/>
-      <header>
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
+
     </AppWrapper>
   );
 }

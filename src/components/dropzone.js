@@ -8,13 +8,27 @@ export default function StyledDropzone() {
     getInputProps,
     isDragActive,
     isDragAccept,
-    isDragReject
-  } = useDropzone({ accept: "text/plain" });
+    isDragReject,
+    acceptedFiles
+  } = useDropzone({ accept: "text/plain", maxSize: 1e7 });
+
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size / 1000} KB
+    </li>
+  ));
 
   return (
     <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-      <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
+      <div>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>(Text files only, 10 MB max)</p>
+      </div>
+      <aside>
+      <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
     </Container>
   );
 }
@@ -27,6 +41,7 @@ const Container = styled.div`
   padding: 20px;
   border-width: 2px;
   border-radius: 2px;
+  height: 175px;
   border-color: ${props => getColor(props)};
   border-style: dashed;
   background-color: #fafafa;
