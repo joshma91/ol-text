@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../logo.svg";
-import Dropzone from "./dropzone"
+import Dropzone from "./dropzone";
+import SubmitButton from "./button";
 
 export default function Main() {
+  const [loading, setLoading] = useState(false);
+
+  function handleAnalyzeClicked() {
+    setLoading(true);
+  }
 
   return (
     <AppWrapper>
-        <Header>Texty Time</Header>
-        <Dropzone/>
-
+      <Header>Texty Time</Header>
+      <Dropzone />
+      <SubmitButton
+        text="Analyze"
+        onClick={() => {
+          handleAnalyzeClicked();
+        }}
+        loading={loading ? 1 : 0}
+      />
     </AppWrapper>
   );
 }
