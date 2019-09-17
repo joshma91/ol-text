@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../logo.svg";
+import useTypingEffect from "use-typing-effect";
 import Dropzone from "./dropzone";
 import SubmitButton from "./button";
 
@@ -11,9 +11,13 @@ export default function Main() {
     setLoading(true);
   }
 
+  const headingText = useTypingEffect(["Texty Time"], {
+    loop: true
+  });
+
   return (
     <AppWrapper>
-      <Header>Texty Time</Header>
+      <Header>{headingText}</Header>
       <Dropzone />
       <SubmitButton
         text="Analyze"
