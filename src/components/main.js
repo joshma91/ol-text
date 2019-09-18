@@ -3,13 +3,18 @@ import styled from "styled-components";
 import useTypingEffect from "use-typing-effect";
 import Dropzone from "./dropzone";
 import SubmitButton from "./button";
+import { sendFile } from "../utils"
 
-
+const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload"
 export default function Main() {
   const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState(null)
 
-  function handleAnalyzeClicked() {
+  async function handleAnalyzeClicked() {
     setLoading(true);
+    const fileInfo = await sendFile(API_URL, files[0])
+    setLoading(false)
+    console.log(fileInfo)
   }
 
   const headingText = useTypingEffect(["Texty Time"], {
@@ -19,7 +24,7 @@ export default function Main() {
   return (
     <AppWrapper>
       <Header>{headingText}</Header>
-      <Dropzone />
+      <Dropzone setFiles={setFiles}/>
       <SubmitButton
         text="Analyze"
         loadingText="Analyzing"

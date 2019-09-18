@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 
-export default function StyledDropzone() {
+export default function StyledDropzone({ setFiles }) {
   const {
     getRootProps,
     getInputProps,
@@ -10,7 +10,13 @@ export default function StyledDropzone() {
     isDragAccept,
     isDragReject,
     acceptedFiles
-  } = useDropzone({ accept: "text/plain", maxSize: 1e7 });
+  } = useDropzone({
+    accept: "text/plain",
+    maxSize: 1e7,
+    onDrop: acceptedFiles => {setFiles(
+      acceptedFiles.map(file => Object.assign(file))
+    )}
+  });
 
   const files = acceptedFiles.map(file => (
     <li key={file.path}>
@@ -26,7 +32,7 @@ export default function StyledDropzone() {
         <p>(Text files only, 10 MB max)</p>
       </div>
       <aside>
-      <h4>Files</h4>
+        <h4>Files</h4>
         <ul>{files}</ul>
       </aside>
     </Container>
