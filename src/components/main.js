@@ -3,14 +3,15 @@ import styled from "styled-components";
 import useTypingEffect from "use-typing-effect";
 import Dropzone from "./dropzone";
 import SubmitButton from "./button";
+import Table from "./table"
 import { sendFile } from "../utils";
-import { Z_STREAM_ERROR } from "zlib";
 
 const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
 export default function Main() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState(null);
   const [isError, setError] = useState(false);
+  const [fileInfo, setFileInfo] = useState(null)
 
   async function handleAnalyzeClicked() {
     if (!files) {
@@ -20,6 +21,7 @@ export default function Main() {
       setLoading(true);
       const fileInfo = await sendFile(API_URL, files[0]);
       setLoading(false);
+      setFileInfo(fileInfo)
       console.log(fileInfo)
     }
   }
@@ -41,6 +43,7 @@ export default function Main() {
         loading={loading ? 1 : 0}
       />
       {isError && <Error>Please select a file first</Error>}
+      <Table fileInfo={fileInfo}/>
     </AppWrapper>
   );
 }
@@ -62,7 +65,7 @@ const AppWrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  color: ${props => props.theme.secondary};
+  color: ${props => props.theme.primary};
   font-size: 2.5em;
   font-family: monospace
   margin: auto;

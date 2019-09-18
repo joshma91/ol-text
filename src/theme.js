@@ -18,9 +18,9 @@ export default createGlobalStyle`
 `;
 
 const theme = {
-  primary: "#f6ecbf",
+  primary: "#c886e5",
   secondary: "#caadde",
-  tertiary: "#c886e5",
+  tertiary: "#f6ecbf",
   background: "#f9f9f9"
 };
 
