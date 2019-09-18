@@ -4,6 +4,7 @@ import useTypingEffect from "use-typing-effect";
 import Dropzone from "./dropzone";
 import SubmitButton from "./button";
 
+
 export default function Main() {
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +22,7 @@ export default function Main() {
       <Dropzone />
       <SubmitButton
         text="Analyze"
+        loadingText="Analyzing"
         onClick={() => {
           handleAnalyzeClicked();
         }}
@@ -48,7 +50,8 @@ const AppWrapper = styled.div`
 
 const Header = styled.h1`
   color: ${props => props.theme.secondary};
-  font-size: 2em;
+  font-size: 2.5em;
+  font-family: monospace
   margin: auto;
   width: 100%;
   margin-bottom: 1rem;
