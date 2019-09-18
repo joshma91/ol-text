@@ -3,18 +3,25 @@ import styled from "styled-components";
 import useTypingEffect from "use-typing-effect";
 import Dropzone from "./dropzone";
 import SubmitButton from "./button";
-import { sendFile } from "../utils"
+import { sendFile } from "../utils";
+import { Z_STREAM_ERROR } from "zlib";
 
-const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload"
+const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
 export default function Main() {
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState(null)
+  const [files, setFiles] = useState(null);
+  const [isError, setError] = useState(false);
 
   async function handleAnalyzeClicked() {
-    setLoading(true);
-    const fileInfo = await sendFile(API_URL, files[0])
-    setLoading(false)
-    console.log(fileInfo)
+    if (!files) {
+      setError(true);
+    } else {
+      setError(false)
+      setLoading(true);
+      const fileInfo = await sendFile(API_URL, files[0]);
+      setLoading(false);
+      console.log(fileInfo)
+    }
   }
 
   const headingText = useTypingEffect(["Texty Time"], {
@@ -24,7 +31,7 @@ export default function Main() {
   return (
     <AppWrapper>
       <Header>{headingText}</Header>
-      <Dropzone setFiles={setFiles}/>
+      <Dropzone setFiles={setFiles} />
       <SubmitButton
         text="Analyze"
         loadingText="Analyzing"
@@ -33,6 +40,7 @@ export default function Main() {
         }}
         loading={loading ? 1 : 0}
       />
+      {isError && <Error>Please select a file first</Error>}
     </AppWrapper>
   );
 }
@@ -60,4 +68,10 @@ const Header = styled.h1`
   margin: auto;
   width: 100%;
   margin-bottom: 1rem;
+`;
+
+const Error = styled.h2`
+  text-align: center;
+  width: 100%;
+  color: ${props => props.theme.tertiary}
 `;
