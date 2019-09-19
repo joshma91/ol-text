@@ -11,6 +11,12 @@ export default function Table({ fileInfo }) {
         </tr>
       </thead>
       <tbody>
+        {fileInfo && (
+            <tr>
+                <td>Total Words</td>
+                <td>{fileInfo.totalCount}</td>
+            </tr>
+        )}
         {fileInfo && Object.keys(fileInfo.counts).map(key => {
           const value = fileInfo.counts[key];
           return (

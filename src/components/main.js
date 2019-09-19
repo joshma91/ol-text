@@ -76,5 +76,5 @@ const Header = styled.h1`
 const Error = styled.h2`
   text-align: center;
   width: 100%;
-  color: ${props => props.theme.tertiary}
+  color: ${props => props.theme.primary}
 `;

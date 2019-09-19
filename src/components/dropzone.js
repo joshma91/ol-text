@@ -51,7 +51,7 @@ const Container = styled.div`
   height: 175px;
   border-color: ${props => getColor(props)};
   border-style: dashed;
-  background-color: #fafafa;
+  background-color: ${props => props.theme.background};
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
