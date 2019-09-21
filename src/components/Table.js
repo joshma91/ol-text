@@ -15,11 +15,10 @@ export default function Table({ fileInfo }) {
           <td>Total Words</td>
           <td>{fileInfo.totalCount}</td>
         </tr>
-        {fileInfo &&
-          Object.keys(fileInfo.counts).map(key => {
+        {Object.keys(fileInfo.counts).map((key, i) => {
             const value = fileInfo.counts[key];
             return (
-              <tr>
+              <tr key={i}>
                 <td>{key}</td>
                 <td>{value}</td>
               </tr>

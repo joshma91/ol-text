@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Button({
-  text,
-  loadingText,
   loading,
   onClick = () => {}
 }) {
@@ -13,7 +11,7 @@ export default function Button({
     <ButtonFrame loading={loading} onClick={() => onClick()}>
       <ButtonText>
         {loading ? <ButtonLoader icon={faSpinner} pulse /> : null}
-        {loading ? loadingText : text}
+        {loading ? "Analyzing" : "Analyze"}
       </ButtonText>
     </ButtonFrame>
   );

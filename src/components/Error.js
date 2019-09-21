@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Error({ isError, errorMessage }) {
-  console.log(isError)
   return (
     <StyledError isError={isError}>{errorMessage}</StyledError>
   );

@@ -23,7 +23,6 @@ export default function Main() {
       setError(false)
       setLoading(true);
       const fileInfo = await sendFile(API_URL, files[0]);
-      setLoading(false);
       if(!fileInfo) {
         setError(true);
         setErrorMessage("There seems to be a problem with reading your file")
@@ -31,6 +30,7 @@ export default function Main() {
         setFileInfo(fileInfo)
         setError(false)
       }
+      setLoading(false);
     }
   }
 
@@ -43,8 +43,6 @@ export default function Main() {
       <Header>{headingText}</Header>
       <Dropzone setFiles={setFiles} />
       <SubmitButton
-        text="Analyze"
-        loadingText="Analyzing"
         onClick={() => {
           handleAnalyzeClicked();
         }}
