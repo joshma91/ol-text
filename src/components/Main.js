@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import useTypingEffect from "use-typing-effect";
-import Dropzone from "./dropzone";
-import SubmitButton from "./button";
-import Table from "./table"
+import Dropzone from "./Dropzone";
+import SubmitButton from "./Button";
+import Table from "./Table"
 import { sendFile } from "../utils";
 
 const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
