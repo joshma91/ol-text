@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Table({ fileInfo }) {
-  return (
+  return fileInfo && fileInfo.counts ? (
     <StyledTable>
       <thead>
         <tr>
@@ -11,24 +11,23 @@ export default function Table({ fileInfo }) {
         </tr>
       </thead>
       <tbody>
-        {fileInfo && (
-            <tr>
-                <td>Total Words</td>
-                <td>{fileInfo.totalCount}</td>
-            </tr>
-        )}
-        {fileInfo && Object.keys(fileInfo.counts).map(key => {
-          const value = fileInfo.counts[key];
-          return (
-            <tr>
-              <td>{key}</td>
-              <td>{value}</td>
-            </tr>
-          );
-        })}
+        <tr>
+          <td>Total Words</td>
+          <td>{fileInfo.totalCount}</td>
+        </tr>
+        {fileInfo &&
+          Object.keys(fileInfo.counts).map(key => {
+            const value = fileInfo.counts[key];
+            return (
+              <tr>
+                <td>{key}</td>
+                <td>{value}</td>
+              </tr>
+            );
+          })}
       </tbody>
     </StyledTable>
-  );
+  ) : null;
 }
 
 const StyledTable = styled.table`

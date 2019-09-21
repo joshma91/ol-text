@@ -4,6 +4,7 @@ import useTypingEffect from "use-typing-effect";
 import Dropzone from "./Dropzone";
 import SubmitButton from "./Button";
 import Table from "./Table"
+import Error from "./Error"
 import { sendFile } from "../utils";
 
 const API_URL = "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
@@ -11,18 +12,25 @@ export default function Main() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState(null);
   const [isError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null)
   const [fileInfo, setFileInfo] = useState(null)
 
   async function handleAnalyzeClicked() {
     if (!files) {
       setError(true);
+      setErrorMessage("Please select a file first")
     } else {
       setError(false)
       setLoading(true);
       const fileInfo = await sendFile(API_URL, files[0]);
       setLoading(false);
-      setFileInfo(fileInfo)
-      console.log(fileInfo)
+      if(!fileInfo) {
+        setError(true);
+        setErrorMessage("There seems to be a problem with reading your file")
+      } else {
+        setFileInfo(fileInfo)
+        setError(false)
+      }
     }
   }
 
@@ -42,7 +50,7 @@ export default function Main() {
         }}
         loading={loading ? 1 : 0}
       />
-      {isError && <Error>Please select a file first</Error>}
+      <Error isError={isError} errorMessage={errorMessage}/>
       <Table fileInfo={fileInfo}/>
     </AppWrapper>
   );
@@ -73,8 +81,3 @@ const Header = styled.h1`
   margin-bottom: 1rem;
 `;
 
-const Error = styled.h2`
-  text-align: center;
-  width: 100%;
-  color: ${props => props.theme.primary}
-`;
