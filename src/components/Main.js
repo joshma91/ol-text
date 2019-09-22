@@ -20,15 +20,14 @@ export default function Main() {
       setError(true);
       setErrorMessage("Please select a file first")
     } else {
-      setError(false)
       setLoading(true);
       const fileInfo = await sendFile(API_URL, files[0]);
       if(!fileInfo) {
         setError(true);
         setErrorMessage("There seems to be a problem with reading your file")
       } else {
-        setFileInfo(fileInfo)
         setError(false)
+        setFileInfo(fileInfo)
       }
       setLoading(false);
     }
