@@ -8,7 +8,7 @@ export default function Button({
   onClick = () => {}
 }) {
   return (
-    <ButtonFrame loading={loading} onClick={() => onClick()}>
+    <ButtonFrame disabled={loading} loading={loading} onClick={() => onClick()}>
       <ButtonText>
         {loading ? <ButtonLoader icon={faSpinner} pulse /> : null}
         {loading ? "Analyzing" : "Analyze"}
@@ -30,10 +30,8 @@ const ButtonFrame = styled.button`
   border-width: 1px;
   outline: 0;
   border: none;
-  cursor: pointer;
-  opacity: ${props => {
-    return props.loading ? 0.7 : 1;
-  }};
+  cursor: ${props => props.loading ? null : 'pointer'};
+  opacity: ${props => props.loading ? 0.7 : 1};
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
 `;
