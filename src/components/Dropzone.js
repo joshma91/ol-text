@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
+import { faPeopleCarry } from "@fortawesome/free-solid-svg-icons";
 
 export default function StyledDropzone({ setFiles }) {
   const {
@@ -13,6 +14,7 @@ export default function StyledDropzone({ setFiles }) {
   } = useDropzone({
     accept: "text/plain",
     maxSize: 1e7,
+    multiple: false,
     onDrop: acceptedFiles => {setFiles(
       acceptedFiles.map(file => Object.assign(file))
     )}
@@ -28,7 +30,7 @@ export default function StyledDropzone({ setFiles }) {
     <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
       <div>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag 'n' drop a file here, or click to select file</p>
         <p>(Text files only, 10 MB max)</p>
       </div>
       <aside>
@@ -47,11 +49,12 @@ const Container = styled.div`
   padding: 20px;
   margin-bottom: 1rem;
   border-width: 2px;
-  border-radius: 2px;
+  border-radius: 15px;
   height: 175px;
   border-color: ${props => getColor(props)};
-  border-style: dashed;
   background-color: ${props => props.theme.background};
+  border-width: ${props => (props.isDragAccept || props.isDragReject) ? '3px' : '2px'};
+  border-style: dashed;
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
@@ -64,8 +67,5 @@ const getColor = props => {
   if (props.isDragReject) {
     return "#ff1744";
   }
-  if (props.isDragActive) {
-    return "#2196f3";
-  }
-  return "#eeeeee";
+  return props.theme.tertiary;
 };
