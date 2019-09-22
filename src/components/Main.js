@@ -45,7 +45,7 @@ export default function Main() {
         onClick={() => {
           handleAnalyzeClicked();
         }}
-        loading={loading ? 1 : 0}
+        loading={loading}
       />
       <Error isError={isError} errorMessage={errorMessage}/>
       <Table fileInfo={fileInfo}/>

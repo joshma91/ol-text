@@ -3,12 +3,9 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export default function Button({
-  loading,
-  onClick = () => {}
-}) {
+export default function Button({ loading, onClick = () => {} }) {
   return (
-    <ButtonFrame disabled={loading} loading={loading} onClick={() => onClick()}>
+    <ButtonFrame loading={loading} disabled={loading} onClick={() => onClick()}>
       <ButtonText>
         {loading ? <ButtonLoader icon={faSpinner} pulse /> : null}
         {loading ? "Analyzing" : "Analyze"}
@@ -17,7 +14,7 @@ export default function Button({
   );
 }
 
-const ButtonFrame = styled.button`
+const ButtonFrame = styled(({ loading, ...props }) => <button {...props} />)`
   padding: 0;
   text-align: center;
   border-radius: 24px;
@@ -30,8 +27,8 @@ const ButtonFrame = styled.button`
   border-width: 1px;
   outline: 0;
   border: none;
-  cursor: ${props => props.loading ? null : 'pointer'};
-  opacity: ${props => props.loading ? 0.7 : 1};
+  cursor: ${props => (props.loading ? null : "pointer")};
+  opacity: ${props => (props.loading ? 0.7 : 1)};
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
 `;
