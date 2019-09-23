@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, act } from "@testing-library/react";
 
 export const simulateFileDrop = (getByTestId, file) => {
   const formElement = getByTestId("dropzone");

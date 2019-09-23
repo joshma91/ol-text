@@ -1,14 +1,13 @@
 import React from "react";
-import { render, fireEvent, getByTestId, waitForElement } from "@testing-library/react";
+import { render, fireEvent, act, waitForElement } from "@testing-library/react";
 import Main from "../components/Main";
-import Dropzone from "../components/Dropzone"
+import Dropzone from "../components/Dropzone";
+import { simulateFileDrop } from "./helpers";
 
 describe("Testing Main component", () => {
-  const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
-  const API_URL =
-    "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
-  const WORKING_FILE_URL = "https://www.w3.org/TR/PNG/iso_8859-1.txt";
-  const BIG_FILE_URL = "https://norvig.com/big.txt";
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
 
   test("user fails to upload a file and clicks Analyze", () => {
     const { getByText, queryByText } = render(<Main />);
@@ -17,13 +16,50 @@ describe("Testing Main component", () => {
     expect(queryByText("Please select a file first")).toBeInTheDocument();
   });
 
-  test("user uploads a file that is rejected by the API" , async () => {
 
-  })
+  test("user uploads valid text file", async () => {
+    
+    const file = new File(["test"], "some.txt", { type: "text/plain" });
 
-  test("user uploads valid text file", () => {
+    const { getByText, getByTestId } = render(<Main />);
 
-  })
+    // Wrapping in await act because of React bug
+    await act(async () => {
+      simulateFileDrop(getByTestId, file);
+    });
 
+    // Simulate click and call API
+    fireEvent.click(getByText(/analyz/i).closest("button"));
 
+    // Wait for DOM change
+    await waitForElement(() => getByText(/total words/i));
+
+    expect(getByText(/total words/i)).toBeInTheDocument();
+  });
+
+  test("user uploads a file that is rejected by the API", async () => {
+    // Disable console.error for this test
+    console.error = jest.fn()
+
+    // Mock fetch response error 
+    global.fetch = jest.fn()
+    global.fetch.mockImplementation(()=> {
+      throw new Error()
+    })
+    const file = new File(["test"], "some.txt", { type: "text/plain" });
+
+    const { getByText, getByTestId } = render(<Main />);
+
+    // Wrapping in await act because of React bug
+    await act(async () => {
+      simulateFileDrop(getByTestId, file);
+    });
+
+    // Simulate click and call API
+    fireEvent.click(getByText(/analyz/i).closest("button"));
+
+    await waitForElement(() => getByText(/There seems to be a problem/i));
+
+    expect(getByText(/There seems to be a problem/i)).toBeInTheDocument();
+  });
 });
