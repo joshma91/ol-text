@@ -2,12 +2,12 @@ import { sendFile } from "../utils";
 import testResults from "./testResults.json";
 
 describe("Testing util functions", () => {
+  const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
   const API_URL =
     "https://wordcount-api.dev.openlaw.io/api/wordcount/v1/upload";
 
   const WORKING_FILE_URL = "https://www.w3.org/TR/PNG/iso_8859-1.txt";
   const BIG_FILE_URL = "https://norvig.com/big.txt";
-  const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
   test("response from file upload should equal verified results", async () => {
     const file = await fetch(PROXY_URL + WORKING_FILE_URL).then(response =>
