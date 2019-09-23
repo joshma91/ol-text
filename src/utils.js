@@ -1,9 +1,11 @@
 export const sendFile = async (apiURL, file) => {
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
+  // Use proxy to override browser's same origin policy
+  const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
   const formData = new FormData();
   formData.append("file", file);
   try {
-    const res = await fetch(proxyurl + apiURL, {
+    const res = await fetch(PROXY_URL + apiURL, {
       method: "post",
       body: formData
     })
