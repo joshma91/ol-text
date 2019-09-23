@@ -16,7 +16,8 @@ export const sendFile = async (apiURL, file) => {
       throw Error(res.error);
     }
     return res;
-  } catch (error) {
+  } catch (error) {    
     console.error(error);
+    throw Error(error);
   }
 };
