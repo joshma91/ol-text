@@ -11,10 +11,6 @@ describe("Testing Table component", () => {
     totalCount: 54
   };
 
-  // Empty implementation of window.scrollTo to supress jsdom error
-  const noop = () => {};
-  Object.defineProperty(window, "scrollTo", { value: noop, writable: true });
-
   test("component is empty when fileInfo is null", () => {
     render(<Table fileInfo={null} />);
 
