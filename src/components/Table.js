@@ -58,6 +58,7 @@ const StyledTable = styled.table`
     }
     :nth-child(odd) {
       border-radius: 8px 0 0 8px;
+      border-right: solid ${props => props.theme.tertiary};
     }
   }
   & tr {
