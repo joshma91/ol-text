@@ -40,14 +40,18 @@ const StyledTable = styled.table`
   margin: 1rem auto 1rem auto;
   border-collapse: collapse;
   background-color: transparent;
+  table-layout: fixed;
   color: ${props => props.theme.secondary};
   & th {
     text-align: inherit;
     padding: 0.75rem;
   }
   & td {
+    max-width: 250px;
+    min-width: 100px;
+    word-wrap: break-word;
     padding: 0.75rem;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 3px solid ${props => props.theme.background};
   }
 `;
