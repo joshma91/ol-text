@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import useTypingEffect from "use-typing-effect";
+import Typed from "react-typed";
 import Dropzone from "./Dropzone";
 import SubmitButton from "./Button";
 import Table from "./Table";
@@ -33,13 +33,19 @@ export default function Main() {
     }
   }
 
-  const headingText = useTypingEffect(["Texty Time"], {
-    loop: true
-  });
-
   return (
     <AppWrapper>
-      <Header>{headingText}</Header>
+      <Header>
+        <Typed
+          loop
+          strings={["Texty Time"]}
+          typeSpeed={70}
+          backSpeed={50}
+          startDelay={200}
+          backDelay={1200}
+          cursorChar={"|"}
+        />
+      </Header>
       <Dropzone setFiles={setFiles} />
       <SubmitButton
         onClick={() => {
@@ -54,7 +60,6 @@ export default function Main() {
 }
 
 const AppWrapper = styled.div`
-  width: 100vw;
   max-width: 640px;
   margin: 0px auto;
   margin-bottom: 1rem;

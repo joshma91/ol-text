@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import "./App.css";
 import GlobalStyle, { ThemeProvider } from "./theme";
 import Main from "./components/Main";
