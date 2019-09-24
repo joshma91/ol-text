@@ -14,6 +14,8 @@ export default createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     font-family: Inter, sans-serif;
     background-color: #f6ecbf;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 `;
 

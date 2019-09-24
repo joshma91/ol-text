@@ -11,7 +11,6 @@ export const sendFile = async (apiURL, file) => {
     })
       .then(res => res.text())
       .then(text => JSON.parse(text))
-      .catch(error => console.log(error));
     if (res.error) {
       throw Error(res.error);
     }
