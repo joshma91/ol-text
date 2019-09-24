@@ -1,9 +1,9 @@
 # Texty Time
 
-This tool allows users to upload a text file and shows them:
+This tool allows users to upload a text file. After uploading, it shows them:
 
-1. the total word count; and
-2. the counts of each occurrence of a word
+1. the total word count in the file; and
+2. the counts of each occurrence of a word in the file
 
 ## Installation 
 
