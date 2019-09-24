@@ -45,13 +45,31 @@ const StyledTable = styled.table`
   & th {
     text-align: inherit;
     padding: 0.75rem;
+    border-bottom: 3px solid ${props => props.theme.background};
   }
   & td {
-    max-width: 250px;
+    max-width: 300px;
     min-width: 100px;
     word-wrap: break-word;
     padding: 0.75rem;
     vertical-align: middle;
-    border-top: 3px solid ${props => props.theme.background};
+    :nth-child(even) {
+      border-radius: 0 8px 8px 0;
+    }
+    :nth-child(odd) {
+      border-radius: 8px 0 0 8px;
+    }
+  }
+  & tr {
+    :nth-child(1) { font-weight: bold }
+    :nth-child(even) {
+      background-color: ${props => props.theme.secondary};
+    }
+    :nth-child(even) {
+      color: ${props => props.theme.tertiary};
+    }
+    :nth-child(odd) {
+      color: ${props => props.theme.secondary};
+    }
   }
 `;
