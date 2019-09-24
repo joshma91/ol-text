@@ -29,3 +29,5 @@ yarn
 ## Building
 
 `npm run build` or `yarn build`
+
+A `build` directory will be created in the root of the project with a static production build of the app.
