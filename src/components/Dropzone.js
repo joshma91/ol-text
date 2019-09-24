@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
-import { faPeopleCarry } from "@fortawesome/free-solid-svg-icons";
 
 export default function StyledDropzone({ setFiles }) {
   const {
